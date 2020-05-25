@@ -1,25 +1,27 @@
 <template>
   <van-swipe-cell v-if="hidden">
     <van-row class="vRow">
-      <van-col class="vCol" span="3">
+      <van-col class="vCol">
         <van-checkbox @change="checkData" v-model="Data.checked"></van-checkbox>
       </van-col>
       <!-- <van-col span="20"> -->
-      <van-card
-        :desc="Data.desc"
-        :num="Data.num"
-        :price="Data.doller"
-        :thumb="Data.img"
-        :title="Data.name"
-      >
-        <template #tags>
-          <van-tag plain type="danger">标签1</van-tag>
-          <van-tag plain type="danger">标签2</van-tag>
-        </template>
-        <template #footer>
-          <van-stepper v-model="Data.num" />
-        </template>
-      </van-card>
+      <van-col class="vCol">
+        <van-card
+          :desc="Data.desc"
+          :num="Data.num"
+          :price="Data.doller"
+          :thumb="Data.img"
+          :title="Data.name"
+        >
+          <template #tags>
+            <van-tag plain type="danger">标签1</van-tag>
+            <van-tag plain type="danger">标签2</van-tag>
+          </template>
+          <template #footer>
+            <van-stepper v-model="Data.num" />
+          </template>
+        </van-card>
+      </van-col>
       <!-- </van-col> -->
     </van-row>
     <template #right>
@@ -30,7 +32,7 @@
 
 <script lang="ts">
 import { Card, Tab, Tabs, Button, Tag, Stepper, Checkbox, Col, Row, SwipeCell } from 'vant'
-import { Component, Vue, Watch, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 interface obj {
   name: string
   num: number
@@ -53,14 +55,10 @@ interface obj {
   }
 })
 export default class extends Vue {
-  @Prop() shopDate: obj
+  @Prop() shopDate: any
   private Data = {}
   private hidden: boolean = true
   private checkData() {
-    // if (this.Data.checked) {
-    // } else {
-    // }
-    // console.log(this.Data)
     this.$emit('shopData', this.Data)
   }
   private del() {
@@ -68,15 +66,19 @@ export default class extends Vue {
   }
   created() {
     this.Data = this.shopDate
-    // this.shopDate[0].checked = true
-    // console.log(this.Data)
   }
 }
 </script>
 
 <style lang="less" scoped>
+.van-swipe-cell__wrapper {
+  // border-bottom: 0.01rem solid #cccccc;
+  // .vRow {
+  //   border-bottom: 0.01rem solid #cccccc;
+  // }
+}
 .van-card {
-  width: 80%;
+  width: 95%;
   text-align: left;
   padding: 0px 0 !important;
   margin: 8px 0 !important;
@@ -93,14 +95,17 @@ export default class extends Vue {
   justify-content: space-between;
   align-items: center;
   background-color: #fafafa;
-  border-top: 0.01rem solid #cccccc;
+  // border-top: 0.01rem solid #cccccc;
   .vCol {
     display: flex;
     justify-content: center;
-    // flex: 1;
+    flex: 1;
+    &:last-child {
+      flex: 9;
+    }
   }
   &:last-child {
-    border-bottom: 0.01rem solid #cccccc;
+    // border-bottom: 0.01rem solid #cccccc;
   }
 }
 .goods-card {

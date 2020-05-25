@@ -6,6 +6,7 @@
         :shop-date="item"
         @delData="delData"
         @shopData="shopData"
+        class="shopNav"
         v-for="(item, index) in shopDate"
       ></shop>
     </template>
@@ -148,6 +149,12 @@ export default class extends Vue {
 </script>
 
 <style lang="less" scoped>
+.shopNav {
+  border-bottom: 1px solid #cccccc;
+  &:first-child {
+    border-top: 1px solid #cccccc;
+  }
+}
 .vrow {
   margin: 8px 0;
 }
