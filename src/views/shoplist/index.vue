@@ -1,10 +1,5 @@
 <template>
   <div class="shoplist">
-    <van-row class="vrow">
-      <van-col class="vCol" span="3">
-        <van-checkbox @click="checkchange()" v-model="checked"></van-checkbox>
-      </van-col>
-    </van-row>
     <template v-if="hidden">
       <shop
         :key="index"
@@ -14,14 +9,21 @@
         v-for="(item, index) in shopDate"
       ></shop>
     </template>
-    <div class="bottom">总价：{{ total }}</div>
+    <!-- <div class="bottom">总价：{{ total }}</div> -->
+    <van-submit-bar :price="total*100" button-text="提交订单">
+      <van-checkbox @click="checkchange()" v-model="checked">全选</van-checkbox>
+      <template #tip>
+        你的收货地址不支持同城送,
+        <span>修改地址</span>
+      </template>
+    </van-submit-bar>
   </div>
 </template>
 
 <script lang="ts">
 import shop from '@/components/shop.vue'
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Checkbox, CheckboxGroup, Col, Row } from 'vant'
+import { Checkbox, CheckboxGroup, Col, Row, SubmitBar } from 'vant'
 interface NumberArray {
   // [index: number]: {
   name: string
@@ -41,7 +43,8 @@ interface NumberArray {
     [Checkbox.name]: Checkbox,
     [CheckboxGroup.name]: CheckboxGroup,
     [Col.name]: Col,
-    [Row.name]: Row
+    [Row.name]: Row,
+    [SubmitBar.name]: SubmitBar
   }
 })
 export default class extends Vue {
