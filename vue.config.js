@@ -21,8 +21,9 @@ function getAssetPath(assetsDir, filePath) {
   return assetsDir ? path.posix.join(assetsDir, filePath) : filePath;
 }
 module.exports = {
+  outputDir: 'dist',
   transpileDependencies: ["pxjy-fulltime"],
-  publicPath: process.env.NODE_ENV !== "development" ? "/erp" : "/", // 部署应用包的基本URL
+  publicPath: process.env.NODE_ENV !== "development" ? "/TSDEMO" : "/", // 部署应用包的基本URL
   lintOnSave: false, // process.env.NODE_ENV === 'development',
   pwa: {
     name: name
