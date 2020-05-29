@@ -21,21 +21,21 @@ function getAssetPath(assetsDir, filePath) {
   return assetsDir ? path.posix.join(assetsDir, filePath) : filePath;
 }
 module.exports = {
-  outputDir: 'dist',
+  outputDir: "dist",
   transpileDependencies: ["pxjy-fulltime"],
-  publicPath: process.env.NODE_ENV !== "development" ? "/TSDEMO" : "/", // 部署应用包的基本URL
+  publicPath: process.env.NODE_ENV !== "development" ? "/vue-typescript" : "/", // 部署应用包的基本URL
   lintOnSave: false, // process.env.NODE_ENV === 'development',
   pwa: {
-    name: name
+    name: name,
   },
   pluginOptions: {
     "style-resources-loader": {
       preProcessor: "scss",
       patterns: [
         path.resolve(__dirname, "src/styles/_variables.scss"),
-        path.resolve(__dirname, "src/styles/_mixins.scss")
-      ]
-    }
+        path.resolve(__dirname, "src/styles/_mixins.scss"),
+      ],
+    },
   },
   chainWebpack(config) {
     config.set("name", name);
@@ -59,7 +59,7 @@ module.exports = {
       // 	.output.filename(filename)
       // 	.chunkFilename(filename)
 
-      config.when(IS_PROD, config => {
+      config.when(IS_PROD, (config) => {
         config
           .devtool(productionSourceMap ? "source-map" : false)
           .output.filename(filename)
@@ -77,28 +77,28 @@ module.exports = {
         changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
         secure: false, // 如果是https接口，需要配置这个参数
         pathRewrite: {
-          "^/feapi": "/" // 修改接口路径
-        }
+          "^/feapi": "/", // 修改接口路径
+        },
       },
       "/uc": {
         target: "http://fulltime.test.pxjy.com/uc/",
         changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
         secure: false, // 如果是https接口，需要配置这个参数
         pathRewrite: {
-          "^/uc": "/"
-        }
-      }
-    }
+          "^/uc": "/",
+        },
+      },
+    },
   },
 
   css: {
-    sourceMap: true // 设置为true，方便css调试
+    sourceMap: true, // 设置为true，方便css调试
   },
 
-  configureWebpack: config => {
+  configureWebpack: (config) => {
     if (!IS_PROD) {
       // 开发环境配置
       config.devtool = "source-map";
     }
-  }
+  },
 };

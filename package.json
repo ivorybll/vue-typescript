@@ -2,7 +2,7 @@
   "name": "tsdemo",
   "version": "0.1.1",
   "private": true,
-  "homepage": "https://ivorybll.github.io/TSDEMO",
+  "homepage": "https://ivorybll.github.io/vue-typescript",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
